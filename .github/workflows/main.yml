@@ -11,12 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Reinstall dependencies
+      - name: Install dependencies in user mode
         run: |
-          pip uninstall python-telegram-bot
-          git clone https://github.com/python-telegram-bot/python-telegram-bot.git
-          cd python-telegram-bot
-          pip install -e .
+          pip install --user python-telegram-bot
 
       - name: Build bot
         run: python bot.py
