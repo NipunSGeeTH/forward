@@ -1,25 +1,32 @@
-import telebot
+name: Run Telegram Bot
 
-# Replace with your bot token
-BOT_TOKEN = '2118571380:AAGR-_rB53MsMon35q5i2B3Nw7RJqPXHy18'
+on:
+  push:
+    branches: [ main ]
 
-bot = telebot.TeleBot(BOT_TOKEN)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-@bot.message_handler(content_types=['text', 'sticker', 'photo', 'audio', 'document', 'video', 'animation'])
-def forward_message(message):
-    if message.content_type == 'text':
-        bot.send_message(message.chat.id, message.text)
-    elif message.content_type == 'sticker':
-        bot.send_sticker(message.chat.id, message.sticker.file_id)
-    elif message.content_type == 'photo':
-        bot.send_photo(message.chat.id, message.photo[-1].file_id)
-    elif message.content_type == 'audio':
-        bot.send_audio(message.chat.id, message.audio.file_id)
-    elif message.content_type == 'document':
-        bot.send_document(message.chat.id, message.document.file_id)
-    elif message.content_type == 'video':
-        bot.send_video(message.chat.id, message.video.file_id)
-    elif message.content_type == 'animation':
-        bot.send_animation(message.chat.id, message.animation.file_id)
+    steps:
+      - uses: actions/checkout@v3
 
-bot.polling()
+      - name: Install dependencies
+        run: pip install pytelegrambotapi
+
+      - name: Build bot
+        run: python bot.py
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: telegram-bot
+          path: bot.py
+
+      - name: Run bot
+        run: python bot.py
