@@ -11,8 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: pip install python-telegram-bot
+      - name: Reinstall dependencies
+        run: |
+          pip uninstall python-telegram-bot
+          pip install --upgrade telegram-ext
 
       - name: Build bot
         run: python bot.py
