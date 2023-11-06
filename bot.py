@@ -1,7 +1,8 @@
 import telegram
 from telegram.ext import Updater, CommandHandler, Filters
 
-updater = Updater('2118571380:AAGR-_rB53MsMon35q5i2B3Nw7RJqPXHy18')
+# Replace '2118571380:AAGR-_rB53MsMon35q5i2B3Nw7RJqPXHy18' with your bot token
+updater = Updater('YOUR_BOT_TOKEN')
 dispatcher = updater.dispatcher
 
 def start(update, context):
