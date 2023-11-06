@@ -1,13 +1,12 @@
-import telegram
-from telegram.ext import Updater, CommandHandler, Filters
+import telebot
 
-updater = Updater('2118571380:AAGR-_rB53MsMon35q5i2B3Nw7RJqPXHy18')
-dispatcher = updater.dispatcher
+# Replace with your bot token
+BOT_TOKEN = '2118571380:AAGR-_rB53MsMon35q5i2B3Nw7RJqPXHy18'
 
-def start(update, context):
-    update.message.reply_text('Hi there! How can I help you today?')
+bot = telebot.TeleBot(BOT_TOKEN)
 
-dispatcher.add_handler(CommandHandler('start', start))
+@bot.message_handler(commands=['start'])
+def send_welcome_message(message):
+    bot.send_message(message.chat.id, 'Hi!')
 
-updater.start_polling()
-updater.idle()
+bot.polling()
