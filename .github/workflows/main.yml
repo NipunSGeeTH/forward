@@ -13,7 +13,7 @@ jobs:
 
       - name: Install dependencies in user mode
         run: |
-          pip install --user python-telegram-bot
+          pip install --user --upgrade telegram-ext
 
       - name: Build bot
         run: python bot.py
