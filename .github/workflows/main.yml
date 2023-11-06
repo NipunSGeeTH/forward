@@ -14,7 +14,9 @@ jobs:
       - name: Reinstall dependencies
         run: |
           pip uninstall python-telegram-bot
-          pip install --upgrade telegram-ext
+          git clone https://github.com/python-telegram-bot/python-telegram-bot.git
+          cd python-telegram-bot
+          pip install -e .
 
       - name: Build bot
         run: python bot.py
