@@ -11,13 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Clone telegram-ext repository
-        run: git clone https://github.com/python-telegram-bot/python-telegram-bot.git
-
-      - name: Install telegram-ext
-        run: |
-          cd python-telegram-bot
-          pip install -e .
+      - name: Install dependencies
+        run: pip install python-telegram-bot
 
       - name: Build bot
         run: python bot.py
