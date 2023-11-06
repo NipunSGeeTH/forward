@@ -13,5 +13,7 @@ foreach ($updates as $update) {
     $chatId = $update->getMessage()->getChat()->getId();
     $message = $update->getMessage()->getText();
 
-    $api->forwardMessage($chatId, $chatId, $message);
+    if ($message === '/start') {
+        $api->sendMessage($chatId, 'Hi!');
+    }
 }
