@@ -30,9 +30,9 @@ jobs:
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
-          with:
-            name: telegram-bot
-            path: bot.py
+        with:
+          name: telegram-bot
+          path: bot.py
 
       - name: Run bot
         run: python bot.py
