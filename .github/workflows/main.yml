@@ -9,30 +9,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: composer install
+      - name: Install dependencies
+        run: pip install telegram
 
-    - name: Build bot
-      run: php bot.php
+      - name: Build bot
+        run: python bot.py
 
-    - name: Deploy bot
-      uses: actions/upload-artifact@v3
-      with:
-        name: telegram-bot
-        path: bot.php
+      - name: Deploy bot
+        uses: actions/upload-artifact@v3
+        with:
+          name: telegram-bot
+          path: bot.py
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: telegram-bot
-        path: bot.php
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: telegram-bot
+          path: bot.py
 
-    - name: Run bot
-      run: php bot.php
+      - name: Run bot
+        run: python bot.py
